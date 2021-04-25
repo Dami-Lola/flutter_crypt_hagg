@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
 
+
+///Generic Button with difference look
 enum ButtonMode { text, outlined, contained,gradient }
 
 class Button extends StatelessWidget {
@@ -78,13 +80,8 @@ class Button extends StatelessWidget {
 
 
         onTap: (disabled == true || loading == true) ? null : onPressed,
-        // style: ButtonStyle(
-        //
-        //   elevation: MaterialStateProperty.all(0),
-        //   backgroundColor: MaterialStateProperty.all(color ?? AppColors.primaryColor),
-        //   padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 16)),
-        //
-        // ),
+
+
 
         child:Container(
           alignment: Alignment.center,

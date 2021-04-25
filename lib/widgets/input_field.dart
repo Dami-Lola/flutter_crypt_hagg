@@ -4,6 +4,7 @@ import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
 
 
+///Generic input text
 
 InputDecoration getInputDecoration({
   @required String label,

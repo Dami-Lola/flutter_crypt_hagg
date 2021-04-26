@@ -28,7 +28,7 @@ abstract class _AuthStore with Store {
 
 
   @computed
-  String get token => accessToken?.authToken;
+  String get token => accessToken?.token;
 
   @computed
   String get refreshToken => accessToken?.refreshToken;

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_crypt_hagg/utils/constant/ReuseableComponent.dart';
 import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
+import 'package:flutter_crypt_hagg/utils/snackbar.dart';
 import 'package:flutter_crypt_hagg/view/create_account/createAccount_screen.dart';
 import 'package:flutter_crypt_hagg/widgets/button.dart';
 import 'package:flutter_crypt_hagg/widgets/input_field.dart';
@@ -90,18 +91,31 @@ class _LoginPage extends State<LoginScreen>{
                             child:  Text('Forgot Password?!',style: TextStyle(color: AppColors.whiteColor,fontFamily: AppFonts.RegularFonts,fontSize: 11),)
                         ),
                         SizedBox(height: 20,),
-                        Container(
+
+
+                    Observer(
+                      builder: (ctx) =>
+                          Container(
                           width: double.infinity,
                           child:  Button(
                             text: 'LOG IN',
                             onPressed: () {
-                              store.submit(context);
+                              store.submit(context: context,e:(e){
+                                showSnackBar(
+                                  ctx,
+                                  message: e,
+                                );
+                              });
                             },
                             loading: store.loading,
                             loaderColor: AppColors.primaryColor,
                             color: AppColors.accentsColor,
                           ),
-                        ),
+                        )
+                    ),
+
+
+
                         GestureDetector(
                           onTap: (){
                             Navigator.of(context).pushNamed(CreateAccountScreen.routeName);
@@ -112,6 +126,7 @@ class _LoginPage extends State<LoginScreen>{
                             ,
                           ),
                         )
+
                       ],
 
                     ),

@@ -23,7 +23,14 @@ class AppColors {
 
 
 
+  static const Color avartarColor = Color.fromRGBO(233, 187, 255, 1);
+
   static const Color gradientColor = Color.fromRGBO(106, 75, 188, 1);
+
+
+
+  static const Color greenColor = Color.fromRGBO(82, 203, 53, 1);
+
 }
 
 

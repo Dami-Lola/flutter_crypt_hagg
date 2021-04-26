@@ -1,5 +1,9 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_crypt_hagg/model/api_client_response/api_client_response.dart';
+import 'package:flutter_crypt_hagg/server/ApiClient.dart';
+import 'package:flutter_crypt_hagg/server/MutableGraphQLConfigClients.dart';
+
 import 'package:mobx/mobx.dart';
 
 
@@ -41,13 +45,25 @@ abstract class _LoginStore with Store {
 
   @action
   void validatePassword(String value) {
-    error.password = isNull(value) || value.isEmpty ? 'Password is required' : null;
+    if (isNull(value) || value.isEmpty)
+      error.password = 'Password is required';
+    else if (value.length < 7)
+      error.password = 'Password must be at least 8 characters long';
+    else
+      error.password = null;
   }
+
 
   @action
   void validateEmail(String value) {
-    error.email = isNull(value) || value.isEmpty ? 'Email is required' : null;
+    if (isNull(value) || value.isEmpty)
+      error.email = 'Email is required';
+    else if (!isEmail(value))
+      error.email = 'Enter a valid email';
+    else
+      error.email = null;
   }
+
 
 
   List<ReactionDisposer> _disposers;
@@ -76,11 +92,33 @@ abstract class _LoginStore with Store {
   }
 
 
-  Future<void> submit( BuildContext context) async {
+  Future<void> submit( {BuildContext context,Function(String) e}) async {
 
     //call button validation
     if (hasErrors) return;
 
+
+
+    String data = MutableGraphQLConfigClients.login(email, password);
+
+    try {
+
+
+
+      var res  =     ApiClients().login(data);
+
+
+    } on ApiClientResponse catch (err) {
+      print(err.message );
+      //if an error occur, it should pass to view and display via snackbar
+      e(err.toString());
+      load(false);
+    } catch (err) {
+      e(err.toString());
+      load(false);
+    } finally {
+      load(false);
+    }
 
 
   }

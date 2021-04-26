@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   connectivity: ^0.4.9
+  flutter_svg: ^0.20.0-nullsafety.3
   dart_json_mapper:
   dart_json_mapper_mobx:
   json_annotation: ^3.0.1
@@ -33,7 +34,7 @@ dependencies:
   provider: ^4.3.3
   validators: ^2.0.0
   graphql_flutter: ^4.0.0-beta
-
+  auto_animated:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

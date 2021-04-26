@@ -7,37 +7,28 @@ part 'user.g.dart';
 @serialize.jsonSerializable
 @serialize.Json(allowCircularReferences: 1)
 class User {
-  String firstName;
-  String middleName;
-  String lastName;
-  String dateOfBirth;
-  String placeOfBirth;
-  String selfie;
+  String id;
+  String phonenumber;
+  String email;
+  String referralCode;
+  String username;
+  bool phoneNumberVerified;
   String gender;
-  String title;
-  String maritalStatus;
 
-  // FIXME: use the appropirate type
-  dynamic armMembershipId;
-  Map<String, dynamic> nationality;
-  List<dynamic> addresses;
 
   User({
-    this.firstName,
-    this.lastName,
-    this.dateOfBirth,
-    this.selfie,
+    this.id,
+    this.email,
+    this.username,
     this.gender,
-    this.addresses,
-    this.armMembershipId,
-    this.maritalStatus,
-    this.middleName,
-    this.nationality,
-    this.placeOfBirth,
-    this.title,
+    this.phonenumber,
+    this.phoneNumberVerified,
+    this.referralCode,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 }
+
+

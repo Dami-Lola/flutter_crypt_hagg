@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_crypt_hagg/utils/router/routes.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
 import 'package:flutter_crypt_hagg/view/splash_screens.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
 
 class HagglexApp extends StatefulWidget {
+ final ValueNotifier<GraphQLClient> client;
+ HagglexApp({this.client});
+
   @override
   _HagglexApp createState() => _HagglexApp();
 }
@@ -31,22 +35,24 @@ class _HagglexApp extends State<HagglexApp> {
     authStore = Provider.of<AuthStore>(context);
     authStore.persistAuth();
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Hagglex',
+    return GraphQLProvider(
+        client: widget.client,
+        child:MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Hagglex',
 
-      // initialRoute: authStore.onboarded
-      //     ? authStore.loginPin == null || authStore.isBiometricEnable
-      //         ? LoginPinBiometricScreen.routeName
-      //         : WelcomeScreen.routeName
-      //     : SplashScreen.routeName,
+        // initialRoute: authStore.onboarded
+        //     ? authStore.loginPin == null || authStore.isBiometricEnable
+        //         ? LoginPinBiometricScreen.routeName
+        //         : WelcomeScreen.routeName
+        //     : SplashScreen.routeName,
 
 
-    //initialRoute: LoginPinBiometrics.routeName,
+        //initialRoute: LoginPinBiometrics.routeName,
 
-     initialRoute: SplashScreens.routeName,
-      onGenerateRoute: RouteGenerator.generateRoute,
-      theme: ThemeData(
+        initialRoute: SplashScreens.routeName,
+        onGenerateRoute: RouteGenerator.generateRoute,
+        theme: ThemeData(
         fontFamily: 'BasisGrotesqueProRegular',
 
         // primarySwatch: Colors.white,
@@ -54,7 +60,8 @@ class _HagglexApp extends State<HagglexApp> {
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+    ),
+    )
     );
   }
 }

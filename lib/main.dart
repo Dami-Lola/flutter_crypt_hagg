@@ -3,9 +3,11 @@ import 'package:dart_json_mapper_mobx/dart_json_mapper_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_crypt_hagg/main.reflectable.dart';
+import 'package:flutter_crypt_hagg/server/GraphQLConfig.dart';
 import 'package:flutter_crypt_hagg/utils/services/secure_storage.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
 import 'package:flutter_crypt_hagg/view/app.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -34,8 +36,15 @@ Future<void> main() async {
     authStore = AuthStore();
   }
 
+  // We're using HiveStore for persistence,
+  // so we need to initialize Hive.
+  await initHiveForFlutter();
+
+
+
+
   // launch app
-  runApp(MyApp(authStore));
+  runApp(MyApp(authStore:authStore));
 }
 
 
@@ -44,17 +53,21 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
 
-  final AuthStore authStore ;
 
-  MyApp(this.authStore);
+  final AuthStore authStore ;
+  final ValueNotifier<GraphQLClient> client;
+  MyApp({this.authStore,this.client});
 
   @override
   Widget build(BuildContext context) {
+    //GraphQLConfig init
+    ValueNotifier<GraphQLClient> client = GraphQLConfig.graphInit(authStore: authStore);
     return MultiProvider(
       providers: [
         Provider<AuthStore>(create: (_) => authStore),
+        Provider<ValueNotifier<GraphQLClient>>(create: (_) => client),
       ],
-      child: HagglexApp(),
+      child: HagglexApp(client:client),
     );
   }
 }

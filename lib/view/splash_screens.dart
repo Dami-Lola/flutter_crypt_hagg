@@ -4,6 +4,7 @@ import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
 import 'package:flutter_crypt_hagg/view/login_screen/login_screen.dart';
 
 
+
 class SplashScreens extends StatefulWidget {
   static const routeName = '/SplashScreens';
   @override

@@ -4,6 +4,8 @@ import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
 import 'package:flutter_crypt_hagg/widgets/button.dart';
 
+import 'dashboard/home_screen.dart';
+
 
 class CompleteScreen extends StatefulWidget{
   static const routeName = '/CompleteScreen';
@@ -53,7 +55,11 @@ class _CompleteScreen extends State<CompleteScreen>{
                       padding: EdgeInsets.symmetric(horizontal: 32),
                       child:  Button(
                         text: 'START EXPLORING',
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(HomeDashboard.routeName);
+
+
+                        },
                         color: AppColors.accentsColor,
                       ),
                     ),

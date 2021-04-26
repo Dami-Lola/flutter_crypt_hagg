@@ -4,19 +4,23 @@
 
 class MutableGraphQLConfigClients{
 
+
+
+
+
 ///createUser
-  static String createUser(String email, String username,
+   String createUser(String email, String username,
       String password, String country,String currency,
       String phonenumber) {
     return """
         mutation{
         register(data: {
-          email:$email,
-          username: $username,
-          password: $password,
-          country: $country,
-          currency: $currency,
-          phonenumber: $phonenumber,
+          email:"$email",
+          username: "$username",
+          password: "$password",
+          country:" $country,"
+          currency: "$currency",
+          phonenumber: "$phonenumber",
          
         }){
           token
@@ -35,7 +39,7 @@ class MutableGraphQLConfigClients{
 
 
   ///login
-  static String login(String email,
+   String login(String email,
           String password) {
         return '''
             mutation{
@@ -59,12 +63,12 @@ class MutableGraphQLConfigClients{
 
 
   ///    verifyUser with code # Require token
-  static String verifyUser(int code) {
+   String verifyUser(int code) {
     return """
             mutation {
                 verifyUser(
                   data:{
-                    code:code
+                    code:$code
                   }
                 ){
                   token

@@ -1,7 +1,6 @@
 import 'package:dart_json_mapper/dart_json_mapper.dart';
 import 'package:flutter_crypt_hagg/model/access_token/access_token.dart';
 import 'package:flutter_crypt_hagg/model/user/user.dart';
-import 'package:flutter_crypt_hagg/model/user_account/user_account.dart';
 import 'package:flutter_crypt_hagg/utils/services/secure_storage.dart';
 import 'package:mobx/mobx.dart';
 
@@ -17,8 +16,7 @@ abstract class _AuthStore with Store {
   @observable
   User user;
 
-  @observable
-  UserAccount userAccount;
+
 
   @observable
   AccessToken accessToken;
@@ -49,8 +47,6 @@ abstract class _AuthStore with Store {
   void persistAuth() {
     _disposers = [
       reaction((_) => user,
-          (_) async => await Storage.storeUser(JsonMapper.serialize(this))),
-      reaction((_) => userAccount,
           (_) async => await Storage.storeUser(JsonMapper.serialize(this))),
       reaction((_) => accessToken,
           (_) async => await Storage.storeUser(JsonMapper.serialize(this))),

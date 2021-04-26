@@ -1,5 +1,6 @@
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_crypt_hagg/model/access_token/access_token.dart';
 import 'package:flutter_crypt_hagg/model/api_client_response/api_client_response.dart';
 import 'package:flutter_crypt_hagg/server/ApiClient.dart';
 import 'package:flutter_crypt_hagg/server/MutableGraphQLConfigClients.dart';
@@ -97,23 +98,30 @@ abstract class _LoginStore with Store {
     //call button validation
     if (hasErrors) return;
 
+    load(true);
 
-
-    String data = MutableGraphQLConfigClients.login(email, password);
+    String data = MutableGraphQLConfigClients().login(email, password);
 
     try {
 
+      ApiClientResponse res  =   await  ApiClients().login(data) ;
 
 
-      var res  =     ApiClients().login(data);
+      ///check for error
+      if(res.hasError){
+        e(res.message.toString());
+        load(false);
+      }else{
+        ///else  we are good
+
+        AccessToken ade =    res.data;
 
 
-    } on ApiClientResponse catch (err) {
-      print(err.message );
-      //if an error occur, it should pass to view and display via snackbar
-      e(err.toString());
-      load(false);
-    } catch (err) {
+      }
+  //
+
+
+    }  catch (err) {
       e(err.toString());
       load(false);
     } finally {

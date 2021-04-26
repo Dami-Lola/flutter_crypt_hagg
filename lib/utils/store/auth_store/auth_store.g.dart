@@ -44,21 +44,6 @@ mixin _$AuthStore on _AuthStore, Store {
     });
   }
 
-  final _$userAccountAtom = Atom(name: '_AuthStore.userAccount');
-
-  @override
-  UserAccount get userAccount {
-    _$userAccountAtom.reportRead();
-    return super.userAccount;
-  }
-
-  @override
-  set userAccount(UserAccount value) {
-    _$userAccountAtom.reportWrite(value, super.userAccount, () {
-      super.userAccount = value;
-    });
-  }
-
   final _$accessTokenAtom = Atom(name: '_AuthStore.accessToken');
 
   @override
@@ -78,7 +63,6 @@ mixin _$AuthStore on _AuthStore, Store {
   String toString() {
     return '''
 user: ${user},
-userAccount: ${userAccount},
 accessToken: ${accessToken},
 token: ${token},
 refreshToken: ${refreshToken},

@@ -7,6 +7,7 @@ import 'package:flutter_crypt_hagg/server/MutableGraphQLConfigClients.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
 import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard/home_dashboard_store.dart';
 import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard/home_screen.dart';
+import 'package:flutter_crypt_hagg/view/dashboard/home_parent_bottomnav.dart';
 import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
 
 import 'package:mobx/mobx.dart';
@@ -134,10 +135,10 @@ abstract class _LoginStore with Store {
         authStore.persistAuth();
 
 
-        if(results.user.phoneNumberVerified) {
+        if(results.user.emailVerified) {
           ///move to verification
           Navigator.of(context).pushNamedAndRemoveUntil(
-              HomeDashboard.routeName, (r) => false);
+              HomeParentDashboard.routeName, (r) => false);
         }else{
           Navigator.of(context).pushNamed(VerifyAccount.routeName);
         }

@@ -30,7 +30,7 @@ class QueryGraphQLConfigClients{
                         phonenumber
                         referralCode
                         username
-                        phoneNumberVerified
+                        emailVerified
                         profile{
                           displayName
                           dateOfBirth

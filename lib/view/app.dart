@@ -15,6 +15,7 @@ import 'dashboard/home_parent_bottomnav.dart';
 
 class HagglexApp extends StatefulWidget {
  final ValueNotifier<GraphQLClient> client;
+ //injecting graphql
  HagglexApp({this.client});
 
   @override
@@ -49,12 +50,8 @@ class _HagglexApp extends State<HagglexApp> {
         debugShowCheckedModeBanner: false,
         title: 'Hagglex',
 
-       // initialRoute: authStore?.pageToGo(),
 
-
-
-        initialRoute: HomeParentDashboard.routeName,
-
+        initialRoute: authStore?.pageToGo(),
 
         onGenerateRoute: RouteGenerator.generateRoute,
         theme: ThemeData(

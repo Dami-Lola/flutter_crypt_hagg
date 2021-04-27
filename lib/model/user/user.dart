@@ -12,7 +12,7 @@ class User {
   String email;
   String referralCode;
   String username;
-  bool phoneNumberVerified;
+  bool emailVerified;
   String gender;
 
 
@@ -22,7 +22,7 @@ class User {
     this.username,
     this.gender,
     this.phonenumber,
-    this.phoneNumberVerified,
+    this.emailVerified,
     this.referralCode,
   });
 

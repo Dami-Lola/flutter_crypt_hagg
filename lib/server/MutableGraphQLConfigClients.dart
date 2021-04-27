@@ -30,7 +30,7 @@ class MutableGraphQLConfigClients{
             phonenumber
             referralCode
             username
-            phoneNumberVerified
+            emailVerified
           }
         }
       }
@@ -54,7 +54,7 @@ class MutableGraphQLConfigClients{
                   phonenumber
                   referralCode
                   username
-                  phoneNumberVerified
+                  emailVerified
                 }
               }
             }
@@ -78,7 +78,7 @@ class MutableGraphQLConfigClients{
                       phonenumber
                       referralCode
                       username
-                      phoneNumberVerified
+                      emailVerified
                       profile{
                         displayName
                         dateOfBirth

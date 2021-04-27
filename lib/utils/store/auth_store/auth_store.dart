@@ -3,6 +3,7 @@ import 'package:flutter_crypt_hagg/model/access_token/access_token.dart';
 import 'package:flutter_crypt_hagg/model/user/user.dart';
 import 'package:flutter_crypt_hagg/utils/services/secure_storage.dart';
 import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard/home_screen.dart';
+import 'package:flutter_crypt_hagg/view/dashboard/home_parent_bottomnav.dart';
 import 'package:flutter_crypt_hagg/view/splashScreen/splash_screens.dart';
 import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
 import 'package:mobx/mobx.dart';
@@ -41,11 +42,11 @@ abstract class _AuthStore with Store {
 
 
       ///check if user is verified
-      if(accessToken.user.phoneNumberVerified){
+      if(accessToken.user.emailVerified){
 
         ///checking if email has been verified
         ///go to dashboard
-        return   HomeDashboard.routeName;
+        return   HomeParentDashboard.routeName;
       }else{
         return  ///go verify email
           VerifyAccount.routeName;

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_crypt_hagg/utils/constant/ReuseableComponent.dart';
 import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
+import 'package:flutter_crypt_hagg/view/dashboard/home_parent_bottomnav.dart';
 import 'package:flutter_crypt_hagg/widgets/button.dart';
 
 import '../dashboard/home_dashboard/home_screen.dart';
@@ -63,7 +64,7 @@ class _CompleteScreen extends State<CompleteScreen>{
                         text: 'START EXPLORING',
                         onPressed: () {
                           Navigator.of(context).pushNamedAndRemoveUntil(
-                              HomeDashboard.routeName, (r) => false
+                              HomeParentDashboard.routeName, (r) => false
                           );
                         },
                         color: AppColors.accentsColor,

@@ -14,15 +14,31 @@ class LogoOut extends StatefulWidget {
   _Screen12State createState() => _Screen12State();
 }
 
-class _Screen12State extends State<LogoOut> {
+class _Screen12State extends State<LogoOut> with SingleTickerProviderStateMixin{
 
+  AnimationController controller;
 
-
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 1000), vsync: this);
+    controller.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var begin = Offset(0.0, 1);
+    var end = Offset(0.0, 0.0);
+    var curve = Curves.fastLinearToSlowEaseIn;
+    var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+    var offsetAnimation = controller.drive(tween);
+
     final authStore = Provider.of<AuthStore>(context);
-    return Scaffold(
+    return SlideTransition(
+        position: offsetAnimation,
+        child:
+
+      Scaffold(
         body: Stack(
           children: [
             ReUseAbleComponent.backgroundImage(context),
@@ -94,6 +110,7 @@ class _Screen12State extends State<LogoOut> {
             ),
           ],
         )
+      )
 
     );
 

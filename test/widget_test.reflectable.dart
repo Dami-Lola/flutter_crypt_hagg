@@ -152,14 +152,14 @@ final _data = <r.Reflectable, r.ReflectorData>{
                       username,
                       gender,
                       phonenumber,
-                      phoneNumberVerified,
+                      emailVerified,
                       referralCode}) =>
                   b
                       ? prefix3.User(
                           email: email,
+                          emailVerified: emailVerified,
                           gender: gender,
                           id: id,
-                          phoneNumberVerified: phoneNumberVerified,
                           phonenumber: phonenumber,
                           referralCode: referralCode,
                           username: username)
@@ -276,7 +276,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             5,
             5, const <int>[], const []),
         r.VariableMirrorImpl(
-            r'phoneNumberVerified',
+            r'emailVerified',
             32773,
             3,
             const prefix0.JsonSerializable(),
@@ -635,7 +635,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             null,
             #phonenumber),
         r.ParameterMirrorImpl(
-            r'phoneNumberVerified',
+            r'emailVerified',
             45062,
             55,
             const prefix0.JsonSerializable(),
@@ -645,7 +645,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             const <int>[],
             const [],
             null,
-            #phoneNumberVerified),
+            #emailVerified),
         r.ParameterMirrorImpl(
             r'referralCode',
             45062,
@@ -731,7 +731,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
             null,
             null),
         r.ParameterMirrorImpl(
-            r'_phoneNumberVerified',
+            r'_emailVerified',
             32870,
             52,
             const prefix0.JsonSerializable(),
@@ -796,8 +796,7 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'email': (dynamic instance) => instance.email,
         r'referralCode': (dynamic instance) => instance.referralCode,
         r'username': (dynamic instance) => instance.username,
-        r'phoneNumberVerified': (dynamic instance) =>
-            instance.phoneNumberVerified,
+        r'emailVerified': (dynamic instance) => instance.emailVerified,
         r'gender': (dynamic instance) => instance.gender
       },
       {
@@ -817,8 +816,8 @@ final _data = <r.Reflectable, r.ReflectorData>{
         r'referralCode=': (dynamic instance, value) =>
             instance.referralCode = value,
         r'username=': (dynamic instance, value) => instance.username = value,
-        r'phoneNumberVerified=': (dynamic instance, value) =>
-            instance.phoneNumberVerified = value,
+        r'emailVerified=': (dynamic instance, value) =>
+            instance.emailVerified = value,
         r'gender=': (dynamic instance, value) => instance.gender = value
       },
       null,

@@ -34,7 +34,7 @@ class ApiClients{
 
       }else if(result.data!= null){
         var data = AccessToken.fromJson(result.data["login"]);
-        data.user.phoneNumberVerified = result.data["login"]["user"]["phoneNumberVerified"];
+        data.user.emailVerified = result.data["login"]["user"]["emailVerified"];
         response.hasError = false;
         response.data = data;
       }
@@ -71,7 +71,7 @@ class ApiClients{
 
       }else if(result.data!= null){
         var data = AccessToken.fromJson(result.data["register"]);
-        data.user.phoneNumberVerified= result.data["register"]["user"]["phoneNumberVerified"];
+        data.user.emailVerified= result.data["register"]["user"]["emailVerified"];
 
 
         response.hasError = false;
@@ -111,7 +111,7 @@ class ApiClients{
 
       }else if(result.data!= null){
         var data = AccessToken.fromJson(result.data['verifyUser']);
-        data.user.phoneNumberVerified= result.data["verifyUser"]["user"]["phoneNumberVerified"];
+        data.user.emailVerified= result.data["verifyUser"]["user"]["emailVerified"];
 
         response.hasError = false;
         response.data = data;
@@ -189,7 +189,7 @@ class ApiClients{
 
       }else if(result.data!= null){
         var data = AccessToken();
-        data.user.phoneNumberVerified = result.data["user"]["phoneNumberVerified"];
+        data.user.emailVerified = result.data["user"]["emailVerified"];
         response.hasError = false;
         response.data = data;
       }

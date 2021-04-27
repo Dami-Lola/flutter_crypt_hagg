@@ -1,11 +1,13 @@
 
 import 'package:auto_animated/auto_animated.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_crypt_hagg/utils/constant/ReuseableComponent.dart';
 import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
 import 'package:flutter_crypt_hagg/view/dashboard/dashboard_items/market_item.dart';
 import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard_store.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 
 class HomeDashboard extends StatefulWidget {
@@ -25,62 +27,158 @@ class _HomeDashboard extends State<HomeDashboard> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: 120,
+          toolbarHeight: 170,
           backgroundColor: AppColors.primaryColor,
           automaticallyImplyLeading :false,
-          leading: Container(
-            padding: EdgeInsets.all(4),
 
-            width: 60,
-            height: 60,
+          title: Container(
+            height: 170,
+            padding: EdgeInsets.all(10),
+            child:Column(
 
-            child:    Container(
-              width: 50,
-              height: 50,
-              margin: EdgeInsets.all(20),
+              children: [
 
-              child:   Container(
-                  width: 40,
-                  height: 40,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
 
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color:AppColors.avartarColor,)
-              ),
+                    CircleAvatar(
 
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color:AppColors.primaryColor,)
-            ),
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppColors.avartarColor,
+                      backgroundColor: AppColors.avartarColor,
 
+                      child: Material(
+color: AppColors.avartarColor,
+                        shape: CircleBorder(
+
+                            side: BorderSide( width: 3, color: AppColors.primaryColor,)
+                        ),
+                        child: Container(
+
+                          margin: EdgeInsets.all(10),
+                          child: Text("NY"
+                            ,style: TextStyle(color: AppColors.primaryColor,fontFamily: AppFonts.BoldFonts,fontSize: 12),
+
+                          ),
+                        )
+                      ),
+                    ),
+
+                    Spacer(),
+                    Text(
+                      '\nHaggleX'
+                        ,style: TextStyle(color: AppColors.whiteColor,fontFamily: AppFonts.BoldFonts,fontSize: 18),
+
+                    ),
+
+                    Spacer(),
+
+                   Container(
+                     width: 26,
+                     height: 26,
+                     child:  CircleAvatar(
+
+                       backgroundColor:AppColors.FaintAccentColor ,
+                       child:  Badge(
+                         badgeColor: AppColors.errorColor,
+                         padding: EdgeInsets.symmetric(horizontal: 5),
+                         badgeContent: Text('5',style: TextStyle(color: AppColors.whiteColor),),
+                         child: Icon(Icons.notifications,color: AppColors.whiteColor,size: 18,),
+                       ),
+                     ),
+                   )
+                  ],
+                ),
+
+                Row(
+                  children: [
+
+                    Observer(
+                      builder: (_) =>
+                          Container(
+                            width: 90,
+                            height: 31,
+
+                            child: Row(
+                              children: [
+
+
+                                GestureDetector(
+                                  onTap: () =>
+                                  store.currencySwitch  = CurrencySwitch.USD ,
+                                  child: Container(
+                                      width: 43,
+                                      margin: EdgeInsets.all(4),
+
+                                      alignment: Alignment.center,
+                                      child: Text("USD",
+                                        style: TextStyle(fontSize: 10,
+                                            color:AppColors.primaryColor),),
+
+                                      decoration: BoxDecoration(
+                                          color: store.currencySwitch  == CurrencySwitch.USD
+                                              ?  AppColors.accentsColor
+                                              :  AppColors.whiteColor,
+                                          border: Border.all(
+                                            color: store.currencySwitch  == CurrencySwitch.USD
+
+                                                ?  AppColors.accentsColor
+                                                : AppColors.whiteColor,
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(30))
+                                      )
+                                  ),
+                                ),
+
+
+
+                                GestureDetector(
+                                  onTap: () =>
+                                   store.currencySwitch  = CurrencySwitch.NGN,
+
+                                child: Container(
+                                      width: 43,
+                                       margin: EdgeInsets.all(4),
+                                      child: Text("NGN",
+                                        style: TextStyle(fontSize: 10,
+                                            color:  AppColors.primaryColor),),
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                          color: store.currencySwitch  == CurrencySwitch.NGN
+                                              ?  AppColors.primaryColor:   AppColors.whiteColor,
+                                          border: Border.all(
+                                            color: store.currencySwitch  == CurrencySwitch.NGN
+
+                                                ?  AppColors.primaryColor
+                                                :   AppColors.whiteColor,
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(30))
+                                      )
+                                  ),
+                                )
+
+                              ],
+                            ),
+                            decoration: BoxDecoration(
+                                color: AppColors.whiteColor,
+                                border: Border.all(
+                                  color: AppColors.whiteColor
+                                ),
+                                borderRadius: BorderRadius.all(Radius
+                                    .circular(60))
+                            ),
+
+                          ),
+                    ),
+                  ],
+                )
+
+              ],
             ),
           ),
 
-          actions: [
-            SizedBox(height: 10,),
-
-            Container(
-              padding: EdgeInsets.all(10),
-              child:Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'Welcome back',
-                    style: TextStyle(
-                      color: AppColors.editTextFloatColor,
-                      fontSize: 12.0,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-
-                ],
-              ),
-            )
-          ],
         ),
 
         body:Container(
@@ -129,12 +227,17 @@ class _HomeDashboard extends State<HomeDashboard> {
                         percentage: store.marketUpdates[index].percentage,
                         amount: store.marketUpdates[index].amount,
                       );
-                    })
+                    }),
 
-
+                Container(
+                    padding: EdgeInsets.symmetric(vertical: 18,horizontal: 16),
+                    child: Text('Markets',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.BoldFonts),)
+                ),
 
               ],
             ),
+
+
 
         )
     );

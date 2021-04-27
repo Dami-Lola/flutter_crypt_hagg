@@ -31,6 +31,9 @@ abstract class _AuthStore with Store {
   String get token => accessToken?.token;
 
 
+  clearAuthStorage(){
+    Storage.deleteUser();
+  }
 
  String pageToGo(){
     ///check is users has logged in or created account before

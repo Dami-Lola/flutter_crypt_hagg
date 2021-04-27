@@ -27,7 +27,7 @@ class AppColors {
 
   static const Color gradientColor = Color.fromRGBO(106, 75, 188, 1);
 
-
+  static const Color FaintAccentColor = Color.fromRGBO(215, 200, 255, 0.22);
 
   static const Color greenColor = Color.fromRGBO(82, 203, 53, 1);
 

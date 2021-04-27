@@ -19,10 +19,10 @@ class AccessToken {
     this.refreshToken,
     this.expiresIn,
     this.user,
-  });
+ });
 
   factory AccessToken.fromJson(Map<String, dynamic> json) =>
       _$AccessTokenFromJson(json);
-  
+
   Map<String, dynamic> toJson() => _$AccessTokenToJson(this);
 }

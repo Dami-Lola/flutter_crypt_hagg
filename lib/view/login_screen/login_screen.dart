@@ -49,7 +49,8 @@ class _LoginPage extends State<LoginScreen>{
                         Container(
                             alignment: Alignment.topLeft,
                             padding: EdgeInsets.only(bottom: 15),
-                            child:  Text('Welcome!',style: TextStyle(color: AppColors.whiteColor,fontFamily: AppFonts.BoldFonts,fontSize: 40),)
+                            child:  Text('Welcome!'
+                              ,style: TextStyle(color: AppColors.whiteColor,fontFamily: AppFonts.BoldFonts,fontSize: 40),)
                         ),
                         SizedBox(height: 25,),
                         Observer(

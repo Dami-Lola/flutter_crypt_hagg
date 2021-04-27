@@ -38,6 +38,8 @@ class _HagglexApp extends State<HagglexApp> {
   Widget build(BuildContext context) {
 
     authStore = Provider.of<AuthStore>(context);
+    //for my testing purpose to clear data before saving
+    authStore.clearAuthStorage();
     authStore.persistAuth();
 
     return GraphQLProvider(
@@ -46,11 +48,11 @@ class _HagglexApp extends State<HagglexApp> {
         debugShowCheckedModeBanner: false,
         title: 'Hagglex',
 
-        initialRoute: authStore?.pageToGo(),
+       // initialRoute: authStore?.pageToGo(),
 
 
 
-      //  initialRoute: HomeDashboard.routeName,
+        initialRoute: HomeDashboard.routeName,
 
 
         onGenerateRoute: RouteGenerator.generateRoute,

@@ -37,8 +37,8 @@ dependencies:
   auto_animated:
   intl_phone_number_input: ^0.6.0
 
-  json_serializable: ^3.5.1
 
+  badges: ^1.2.0
   intl: ^0.16.1
   http:
 

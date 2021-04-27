@@ -123,7 +123,7 @@ class _VerifyAccount extends State<VerifyAccount>{
                                 builder: (ctx) =>
                                   InkWell(
                                     onTap: (){
-                                      store.resendVerificationPin(email: authStore?.accessToken?.user?.email,
+                                      store.resendVerificationPin(authStore:authStore,email: authStore?.accessToken?.user?.email,
                                           m: (m){
                                         showSnackBar(ctx, message: m,);
                                       },

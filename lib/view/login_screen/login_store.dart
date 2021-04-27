@@ -120,9 +120,15 @@ abstract class _LoginStore with Store {
 
 
         AccessToken results = AccessToken();
+
+
         results =    res.data;
 
         ///persist to secure storage
+
+        //for my testing purpose to clear data before saving
+        authStore.clearAuthStorage();
+
         authStore.accessToken = results;
         authStore.persistAuth();
 

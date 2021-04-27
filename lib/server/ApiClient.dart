@@ -20,8 +20,8 @@ class ApiClients{
     try {
 
       ///initializing GraphQLConfig
-      GraphQLConfig  graphQLConfiguration  = GraphQLConfig(store);
-      GraphQLClient _client = graphQLConfiguration.clientToQuery();
+      GraphQLConfig  graphQLConfiguration  = GraphQLConfig();
+      GraphQLClient _client = graphQLConfiguration.clientToQuery(store);
       QueryResult result = await _client.mutate(
         MutationOptions(
           document: gql(data), // this
@@ -57,8 +57,8 @@ class ApiClients{
   Future<ApiClientResponse>  createAccount(String data,AuthStore store) async {
     try {
       ///initializing GraphQLConfig
-      GraphQLConfig  graphQLConfiguration  = GraphQLConfig(store);
-      GraphQLClient _client = graphQLConfiguration.clientToQuery();
+      GraphQLConfig  graphQLConfiguration  = GraphQLConfig();
+      GraphQLClient _client = graphQLConfiguration.clientToQuery(store);
       QueryResult result = await _client.mutate(
         MutationOptions(
           document: gql(data), // this
@@ -97,8 +97,8 @@ class ApiClients{
     try {
 
       ///initializing GraphQLConfig
-      GraphQLConfig  graphQLConfiguration  = GraphQLConfig(store);
-      GraphQLClient _client = graphQLConfiguration.clientToQuery();
+      GraphQLConfig  graphQLConfiguration  = GraphQLConfig();
+      GraphQLClient _client = graphQLConfiguration.clientToQuery(store);
       QueryResult result = await _client.mutate(
         MutationOptions(
           document: gql(data), // this
@@ -110,7 +110,9 @@ class ApiClients{
         response.message = result.exception?.graphqlErrors[0]?.message ?? "connection problem";
 
       }else if(result.data!= null){
-        var data = AccessToken.fromJson(result.data[""]);
+        var data = AccessToken.fromJson(result.data['verifyUser']);
+        data.user.phoneNumberVerified= result.data["verifyUser"]["user"]["phoneNumberVerified"];
+
         response.hasError = false;
         response.data = data;
       }
@@ -135,8 +137,8 @@ class ApiClients{
     try {
 
       ///initializing GraphQLConfig
-      GraphQLConfig  graphQLConfiguration  = GraphQLConfig(store);
-      GraphQLClient _client = graphQLConfiguration.clientToQuery();
+      GraphQLConfig  graphQLConfiguration  = GraphQLConfig();
+      GraphQLClient _client = graphQLConfiguration.clientToQuery(store);
       QueryResult result = await _client.query(
         QueryOptions(
           document: gql(data), // this
@@ -165,5 +167,42 @@ class ApiClients{
 
   }
 
+
+
+
+
+  Future<ApiClientResponse>  getUserProfileDetails(String data,AuthStore store) async {
+    try {
+
+      ///initializing GraphQLConfig
+      GraphQLConfig  graphQLConfiguration  = GraphQLConfig();
+      GraphQLClient _client = graphQLConfiguration.clientToQuery(store);
+      QueryResult result = await _client.query(
+        QueryOptions(
+          document: gql(data), // this
+        ),
+      );
+      if(result.hasException){
+        print(result.exception?.graphqlErrors[0]?.message);
+        response.hasError = true;
+        response.message = result.exception?.graphqlErrors[0]?.message ?? "connection problem";
+
+      }else if(result.data!= null){
+        var data = AccessToken();
+        data.user.phoneNumberVerified = result.data["user"]["phoneNumberVerified"];
+        response.hasError = false;
+        response.data = data;
+      }
+
+      return response;
+    }catch(e){
+      print(e);
+      response.hasError = true;
+      response.message = e.toString();
+      return response;
+
+    }
+
+  }
 
 }

@@ -175,7 +175,12 @@ abstract class _CreateAccountStore with Store {
         AccessToken results = AccessToken();
         results =    res.data;
 
+
+        //for my testing purpose to clear data before saving
+        authStore.clearAuthStorage();
+
         ///persist to secure storage
+
         authStore.accessToken = results;
         authStore.persistAuth();
 

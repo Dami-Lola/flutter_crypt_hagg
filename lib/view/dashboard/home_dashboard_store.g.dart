@@ -25,6 +25,21 @@ mixin _$HomeDashboardStore on _HomeDashboardStore, Store {
     });
   }
 
+  final _$currencySwitchAtom = Atom(name: '_HomeDashboardStore.currencySwitch');
+
+  @override
+  CurrencySwitch get currencySwitch {
+    _$currencySwitchAtom.reportRead();
+    return super.currencySwitch;
+  }
+
+  @override
+  set currencySwitch(CurrencySwitch value) {
+    _$currencySwitchAtom.reportWrite(value, super.currencySwitch, () {
+      super.currencySwitch = value;
+    });
+  }
+
   final _$marketUpdatesAtom = Atom(name: '_HomeDashboardStore.marketUpdates');
 
   @override
@@ -44,6 +59,7 @@ mixin _$HomeDashboardStore on _HomeDashboardStore, Store {
   String toString() {
     return '''
 dashboardBanner: ${dashboardBanner},
+currencySwitch: ${currencySwitch},
 marketUpdates: ${marketUpdates}
     ''';
   }

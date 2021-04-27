@@ -7,13 +7,14 @@ class QueryGraphQLConfigClients{
 ///Resend verification
 
   static String resendVerification(String email){
-    return """
-            query{
-              resendVerificationCode(data: {
-                email:"$email",
-              })
-        }
-    """;
+    return '''
+        query{
+      resendVerificationCode(data: {
+        email:"$email",
+      })
+}
+    
+    ''';
   }
 
 

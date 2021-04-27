@@ -20,9 +20,13 @@ abstract class _HomeDashboardStore with Store {
   List<String>  dashboardBanner = ["assets/images/slide_1.png","assets/images/slide_2.png","assets/images/slide_3.png","assets/images/slide_4.png"];
 
 
+  ///swich for currency switch
+  @observable
+  CurrencySwitch currencySwitch  = CurrencySwitch.USD ;
 
 
 
+///dummy daya for market
   @observable
   List<Market>  marketUpdates = [
     Market(img: 'haggle.png',title: 'Haggle (HAG)',
@@ -51,3 +55,8 @@ abstract class _HomeDashboardStore with Store {
 
 }
 
+
+enum CurrencySwitch{
+  NGN,
+  USD
+}

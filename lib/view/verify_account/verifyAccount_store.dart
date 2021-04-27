@@ -78,7 +78,7 @@ abstract class _VerifyAccountStore with Store {
   }
 
 //
-  Future<void> submitPin( {BuildContext context,Function(String) e,AuthStore authStore}) async {
+  Future<void> submitPin( {BuildContext context,Function(String) e,@required AuthStore authStore}) async {
 
     //call button validation
     if (hasErrors) return;
@@ -101,6 +101,10 @@ abstract class _VerifyAccountStore with Store {
 
       ///check for error
       if(res.hasError){
+        if(res.message.toString()=='User verified'){
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              CompleteScreen.routeName, (r) => false);
+        }
         e(res.message.toString());
         load(false);
       }else{
@@ -124,12 +128,12 @@ abstract class _VerifyAccountStore with Store {
 
   }
 
-  Future<void> resendVerificationPin( {@required String email,Function(String) m,Function(bool) isLoading,AuthStore authStore}) async {
+  Future<void> resendVerificationPin( {@required String email,Function(String) m,Function(bool) isLoading,@required AuthStore authStore}) async {
     try {
 
       isLoading(true);
-      String daa = QueryGraphQLConfigClients.resendVerification(email);
-      String data = QueryGraphQLConfigClients.getUserProfile();
+      String data = QueryGraphQLConfigClients.resendVerification(email);
+
 
 
       ApiClientResponse res  =   await  ApiClients().resendVerificationCode(data,authStore) ;

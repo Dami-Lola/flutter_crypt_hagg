@@ -2,6 +2,9 @@ import 'package:dart_json_mapper/dart_json_mapper.dart';
 import 'package:flutter_crypt_hagg/model/access_token/access_token.dart';
 import 'package:flutter_crypt_hagg/model/user/user.dart';
 import 'package:flutter_crypt_hagg/utils/services/secure_storage.dart';
+import 'package:flutter_crypt_hagg/view/dashboard/home_screen.dart';
+import 'package:flutter_crypt_hagg/view/splashScreen/splash_screens.dart';
+import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
 import 'package:mobx/mobx.dart';
 
 
@@ -13,8 +16,7 @@ class AuthStore extends _AuthStore with _$AuthStore {}
 
 @jsonSerializable
 abstract class _AuthStore with Store {
-  @observable
-  User user;
+
 
 
 
@@ -28,11 +30,31 @@ abstract class _AuthStore with Store {
   @computed
   String get token => accessToken?.token;
 
-  @computed
-  String get refreshToken => accessToken?.refreshToken;
 
-  @computed
-  bool get auth => accessToken != null && user != null;
+
+ String pageToGo(){
+    ///check is users has logged in or created account before
+    if( accessToken != null  && accessToken?.user?.email!= null){
+
+
+      ///check if user is verified
+      if(accessToken.user.phoneNumberVerified){
+
+        ///checking if email has been verified
+        ///go to dashboard
+        return   HomeDashboard.routeName;
+      }else{
+        return  ///go verify email
+          VerifyAccount.routeName;
+      }
+    }
+    else {
+
+      ///else you are a new user
+      return SplashScreens.routeName;
+    }
+
+  }
 
   List<ReactionDisposer> _disposers;
 
@@ -46,8 +68,7 @@ abstract class _AuthStore with Store {
   /// is added.
   void persistAuth() {
     _disposers = [
-      reaction((_) => user,
-          (_) async => await Storage.storeUser(JsonMapper.serialize(this))),
+
       reaction((_) => accessToken,
           (_) async => await Storage.storeUser(JsonMapper.serialize(this))),
 

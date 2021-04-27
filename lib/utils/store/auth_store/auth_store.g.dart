@@ -15,34 +15,6 @@ mixin _$AuthStore on _AuthStore, Store {
   String get token => (_$tokenComputed ??=
           Computed<String>(() => super.token, name: '_AuthStore.token'))
       .value;
-  Computed<String> _$refreshTokenComputed;
-
-  @override
-  String get refreshToken =>
-      (_$refreshTokenComputed ??= Computed<String>(() => super.refreshToken,
-              name: '_AuthStore.refreshToken'))
-          .value;
-  Computed<bool> _$authComputed;
-
-  @override
-  bool get auth => (_$authComputed ??=
-          Computed<bool>(() => super.auth, name: '_AuthStore.auth'))
-      .value;
-
-  final _$userAtom = Atom(name: '_AuthStore.user');
-
-  @override
-  User get user {
-    _$userAtom.reportRead();
-    return super.user;
-  }
-
-  @override
-  set user(User value) {
-    _$userAtom.reportWrite(value, super.user, () {
-      super.user = value;
-    });
-  }
 
   final _$accessTokenAtom = Atom(name: '_AuthStore.accessToken');
 
@@ -62,11 +34,8 @@ mixin _$AuthStore on _AuthStore, Store {
   @override
   String toString() {
     return '''
-user: ${user},
 accessToken: ${accessToken},
-token: ${token},
-refreshToken: ${refreshToken},
-auth: ${auth}
+token: ${token}
     ''';
   }
 }

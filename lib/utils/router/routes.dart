@@ -1,10 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_crypt_hagg/view/complete_screen.dart';
+import 'package:flutter_crypt_hagg/view/completescreen/complete_screen.dart';
+import 'package:flutter_crypt_hagg/view/countryScreen/countryScreen.dart';
 import 'package:flutter_crypt_hagg/view/create_account/createAccount_screen.dart';
 import 'package:flutter_crypt_hagg/view/dashboard/home_screen.dart';
 import 'package:flutter_crypt_hagg/view/login_screen/login_screen.dart';
-import 'package:flutter_crypt_hagg/view/splash_screens.dart';
+import 'package:flutter_crypt_hagg/view/splashScreen/splash_screens.dart';
 import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
 
 
@@ -34,6 +35,9 @@ class RouteGenerator {
 
       case HomeDashboard.routeName:
         return MaterialPageRoute(builder: (_) => HomeDashboard());
+
+      case CountryScreen.routeName:
+        return MaterialPageRoute(builder: (_) => CountryScreen());
 
 
       default:

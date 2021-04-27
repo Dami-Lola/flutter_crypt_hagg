@@ -36,6 +36,7 @@ InputDecoration getInputDecoration({
     border: UnderlineInputBorder(
       borderSide: BorderSide(color: bottomLabelColor ?? AppColors.whiteColor),
     ),
+
     focusedBorder: UnderlineInputBorder(
       borderSide: BorderSide(color:bottomLabelColor ?? AppColors.whiteColor),
     ),
@@ -43,6 +44,7 @@ InputDecoration getInputDecoration({
     enabledBorder: UnderlineInputBorder(
       borderSide: BorderSide(color:hintColor ?? AppColors.whiteColor),
     ),
+
   );
 }
 

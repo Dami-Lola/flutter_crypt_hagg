@@ -115,31 +115,22 @@ class _HomeDashboard extends State<HomeDashboard> {
                 ),
 
 
-               Column(
-                 children: [
-                   LiveList(
-                     showItemInterval: Duration(milliseconds: 90),
-                     showItemDuration: Duration(milliseconds: 90),
-                     reAnimateOnVisibility: true,
-                     scrollDirection: Axis.vertical,
-                     itemCount:store.marketUpdates.length ,
-                     itemBuilder: ReUseAbleComponent.animationItemBuilder((
-                             (index) =>
-                             MarketItem(
-                               title: store.marketUpdates[index].title,
-                               img: store.marketUpdates[index].img,
-                               chartImg: store.marketUpdates[index].chartImg,
-                               percentage: store.marketUpdates[index].percentage,
-                               amount: store.marketUpdates[index].amount,
 
-                             )
+                ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: store.marketUpdates.length ,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context,
+                        index) {
+                      return  MarketItem(
+                        title: store.marketUpdates[index].title,
+                        img: store.marketUpdates[index].img,
+                        chartImg: store.marketUpdates[index].chartImg,
+                        percentage: store.marketUpdates[index].percentage,
+                        amount: store.marketUpdates[index].amount,
+                      );
+                    })
 
-                     ),
-                       padding: EdgeInsets.symmetric(vertical: 8),
-                     ),
-                   )
-                 ],
-               )
 
 
               ],

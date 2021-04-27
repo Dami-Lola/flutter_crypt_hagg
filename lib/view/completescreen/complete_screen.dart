@@ -4,7 +4,7 @@ import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
 import 'package:flutter_crypt_hagg/widgets/button.dart';
 
-import 'dashboard/home_screen.dart';
+import '../dashboard/home_screen.dart';
 
 
 class CompleteScreen extends StatefulWidget{
@@ -27,6 +27,7 @@ class _CompleteScreen extends State<CompleteScreen>{
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+
                     Image.asset(
                       'assets/images/mark_2.png',
                       width: 64,
@@ -41,8 +42,13 @@ class _CompleteScreen extends State<CompleteScreen>{
                               fontFamily: AppFonts.BoldFonts,
                               fontSize: 16),)
                     ),
-                    Text('Thank you for setting up your HaggleX account',style:
-                    TextStyle(color: AppColors.whiteColor,fontFamily: AppFonts.RegularFonts,fontSize: 9),),
+
+                    Text('Thank you for setting up your HaggleX account',
+                      style: TextStyle(color:
+                      AppColors.whiteColor,
+                          fontFamily: AppFonts.RegularFonts,
+                          fontSize: 9),),
+
                   ],
                 ),
               ),
@@ -56,9 +62,9 @@ class _CompleteScreen extends State<CompleteScreen>{
                       child:  Button(
                         text: 'START EXPLORING',
                         onPressed: () {
-                          Navigator.of(context).pushNamed(HomeDashboard.routeName);
-
-
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                              HomeDashboard.routeName, (r) => false
+                          );
                         },
                         color: AppColors.accentsColor,
                       ),

@@ -14,7 +14,7 @@ AccessToken _$AccessTokenFromJson(Map<String, dynamic> json) {
     user: json['user'] == null
         ? null
         : User.fromJson(json['user'] as Map<String, dynamic>),
-  );
+  )..resendVerificationCode = json['resend_verification_code'] as bool;
 }
 
 Map<String, dynamic> _$AccessTokenToJson(AccessToken instance) =>
@@ -22,5 +22,6 @@ Map<String, dynamic> _$AccessTokenToJson(AccessToken instance) =>
       'token': instance.token,
       'refresh_token': instance.refreshToken,
       'expires_in': instance.expiresIn,
+      'resend_verification_code': instance.resendVerificationCode,
       'user': instance.user,
     };

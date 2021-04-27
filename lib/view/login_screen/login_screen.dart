@@ -4,10 +4,12 @@ import 'package:flutter_crypt_hagg/utils/constant/ReuseableComponent.dart';
 import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
 import 'package:flutter_crypt_hagg/utils/snackbar.dart';
+import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
 import 'package:flutter_crypt_hagg/view/create_account/createAccount_screen.dart';
 import 'package:flutter_crypt_hagg/widgets/button.dart';
 import 'package:flutter_crypt_hagg/widgets/input_field.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'login_store.dart';
 
 
@@ -20,16 +22,16 @@ class  LoginScreen extends StatefulWidget{
 }
 
 class _LoginPage extends State<LoginScreen>{
+
+  /// contain the business logic of this class and
+  /// use mobx for state management and
+  /// Observer is used to listing to any changes
   LoginStore store = LoginStore();
 
-  @override
-  void dispose() {
-    store.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final authStore = Provider.of<AuthStore>(context);
     return Scaffold(
       body:   Container (
           child: Stack(
@@ -99,13 +101,13 @@ class _LoginPage extends State<LoginScreen>{
                           width: double.infinity,
                           child:  Button(
                             text: 'LOG IN',
-                            onPressed: () {
-                              store.submit(context: context,e:(e){
-                                showSnackBar(
-                                  ctx,
-                                  message: e,
-                                );
-                              });
+                            onPressed: () {store.submit(context: context,e:(e){
+                              ///snackBar
+                                showSnackBar(ctx, message: e,);
+                            },
+                                /// to save to store
+                            authStore: authStore
+                            );
                             },
                             loading: store.loading,
                             loaderColor: AppColors.primaryColor,

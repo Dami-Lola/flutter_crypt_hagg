@@ -1,10 +1,15 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
 import 'package:flutter_crypt_hagg/utils/router/routes.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
-import 'package:flutter_crypt_hagg/view/splash_screens.dart';
+import 'package:flutter_crypt_hagg/view/splashScreen/splash_screens.dart';
+import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
+
+import 'dashboard/home_screen.dart';
+
 
 
 class HagglexApp extends StatefulWidget {
@@ -41,19 +46,16 @@ class _HagglexApp extends State<HagglexApp> {
         debugShowCheckedModeBanner: false,
         title: 'Hagglex',
 
-        // initialRoute: authStore.onboarded
-        //     ? authStore.loginPin == null || authStore.isBiometricEnable
-        //         ? LoginPinBiometricScreen.routeName
-        //         : WelcomeScreen.routeName
-        //     : SplashScreen.routeName,
+        initialRoute: authStore?.pageToGo(),
 
 
-        //initialRoute: LoginPinBiometrics.routeName,
 
-        initialRoute: SplashScreens.routeName,
+      //  initialRoute: HomeDashboard.routeName,
+
+
         onGenerateRoute: RouteGenerator.generateRoute,
         theme: ThemeData(
-        fontFamily: 'BasisGrotesqueProRegular',
+        fontFamily: AppFonts.RegularFonts,
 
         // primarySwatch: Colors.white,
         // This makes the visual density adapt to the platform that you run

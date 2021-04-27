@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //GraphQLConfig init
-    ValueNotifier<GraphQLClient> client = GraphQLConfig.graphInit(authStore: authStore);
+    ValueNotifier<GraphQLClient> client = GraphQLConfig(authStore).graphInit();
     return MultiProvider(
       providers: [
         Provider<AuthStore>(create: (_) => authStore),

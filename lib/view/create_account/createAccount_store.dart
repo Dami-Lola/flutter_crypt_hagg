@@ -4,10 +4,14 @@ import 'package:flutter_crypt_hagg/model/access_token/access_token.dart';
 import 'package:flutter_crypt_hagg/model/api_client_response/api_client_response.dart';
 import 'package:flutter_crypt_hagg/server/ApiClient.dart';
 import 'package:flutter_crypt_hagg/server/MutableGraphQLConfigClients.dart';
+import 'package:flutter_crypt_hagg/utils/locale.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
-import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard_store.dart';
 import 'package:flutter_crypt_hagg/view/dashboard/home_screen.dart';
 import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
+import 'package:http/http.dart';
+import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import 'package:mobx/mobx.dart';
 
@@ -17,12 +21,13 @@ import 'package:validators/validators.dart';
 
 
 
-part 'login_store.g.dart';
+part 'createAccount_store.g.dart';
 
-class LoginStore = _LoginStore with _$LoginStore;
+class CreateAccountStore = _CreateAccountStore with _$CreateAccountStore;
 
-abstract class _LoginStore with Store {
-  final LoginErrorStore error = LoginErrorStore();
+abstract class _CreateAccountStore with Store {
+  final CreateAccountErrorStore error = CreateAccountErrorStore();
+
 
 
   @observable
@@ -32,8 +37,21 @@ abstract class _LoginStore with Store {
   @observable
   String email;
 
+
   @observable
   String password;
+
+
+  @observable
+  String userName;
+
+
+  @observable
+  String phoneNumber;
+
+
+  @observable
+  String referralCode;
 
 
   @observable
@@ -45,6 +63,14 @@ abstract class _LoginStore with Store {
     this.loading = load;
   }
 
+
+  String country = "Nigeria";
+  @action
+  Future<void> loadCountry() async {
+    Response data = await http.get('http://ip-api.com/json');
+    Map dataa = jsonDecode(data.body);
+     country = dataa['country'];
+  }
 
 
 
@@ -69,15 +95,31 @@ abstract class _LoginStore with Store {
       error.email = null;
   }
 
+  @action
+  void validateUser(String value) {
+    if (isNull(value) || value.isEmpty)
+      error.userName = 'UserName is required';
+    else
+      error.userName = null;
+  }
+
+  @action
+  void validatePhoneNumber(String value) {
+    if (isNull(value) || value.isEmpty)
+      error.phoneNumber = 'phone Number is required';
+    else
+      error.phoneNumber = null;
+  }
 
 
   List<ReactionDisposer> _disposers;
 
   void setupValidations() {
     _disposers = [
-
       reaction((_) => email, validateEmail),
-      reaction((_) => password, validatePassword)
+      reaction((_) => password, validatePassword),
+      reaction((_) => userName, validateUser),
+      reaction((_) => phoneNumber, validatePhoneNumber)
     ];
   }
 
@@ -91,7 +133,8 @@ abstract class _LoginStore with Store {
     //when submit button is clicked, validation on email text field and password text field is check
     validateEmail(email);
     validatePassword(password);
-
+    validatePhoneNumber(phoneNumber);
+    validateUser(userName);
 
     return error.hasErrors;
   }
@@ -104,11 +147,21 @@ abstract class _LoginStore with Store {
 
     load(true);
 
-    String data = MutableGraphQLConfigClients().login(email, password);
+    ///get current country
+
+
+    ///get  country currency
+    // Locale local = Localizations.localeOf(context);
+    var format = UserLocale.fetchLocale(context);
+
+
+
+    ///make network call
+    String data = MutableGraphQLConfigClients().createUser(email,userName, password,country,format?.currencyName??"NGN",phoneNumber);
 
     try {
 
-      ApiClientResponse res  =   await  ApiClients().login(data,authStore) ;
+      ApiClientResponse res  =   await  ApiClients().createAccount(data,authStore) ;
 
 
       ///check for error
@@ -127,13 +180,8 @@ abstract class _LoginStore with Store {
         authStore.persistAuth();
 
 
-        if(results.user.phoneNumberVerified) {
-          ///move to verification
-          Navigator.of(context).pushNamedAndRemoveUntil(
-              HomeDashboard.routeName, (r) => false);
-        }else{
-          Navigator.of(context).pushNamed(VerifyAccount.routeName);
-        }
+        ///move to verification
+        Navigator.of(context).pushNamed(VerifyAccount.routeName);
 
       }
   //
@@ -153,18 +201,24 @@ abstract class _LoginStore with Store {
 
 }
 
- class LoginErrorStore = _LoginErrorStore with _$LoginErrorStore;
+ class CreateAccountErrorStore = _CreateAccountErrorStore with _$CreateAccountErrorStore;
 
-abstract class _LoginErrorStore with Store {
+abstract class _CreateAccountErrorStore with Store {
   @observable
   String email;
 
   @observable
   String password;
 
+  @observable
+  String userName;
 
+  @observable
+  String phoneNumber;
 
+  @observable
+  String referralCode;
 
   @computed
-  bool get hasErrors => email != null || password != null ;
+  bool get hasErrors => email != null || password != null || userName != null || phoneNumber != null ;
 }

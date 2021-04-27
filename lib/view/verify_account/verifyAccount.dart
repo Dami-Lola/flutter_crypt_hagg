@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_crypt_hagg/utils/constant/ReuseableComponent.dart';
 import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
-import 'package:flutter_crypt_hagg/view/complete_screen.dart';
+import 'package:flutter_crypt_hagg/utils/snackbar.dart';
+import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
+import 'package:flutter_crypt_hagg/view/completescreen/complete_screen.dart';
+import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount_store.dart';
 import 'package:flutter_crypt_hagg/widgets/back_button.dart';
 import 'package:flutter_crypt_hagg/widgets/button.dart';
 import 'package:flutter_crypt_hagg/widgets/input_field.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class  VerifyAccount extends StatefulWidget{
   static const routeName = '/VerifyAccount';
@@ -16,16 +20,21 @@ class  VerifyAccount extends StatefulWidget{
 }
 
 class _VerifyAccount extends State<VerifyAccount>{
-  @override
-  void dispose() {
-    super.dispose();
-  }
+
+  VerifyAccountStore  store = VerifyAccountStore();
+
+
+
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery
         .of(context)
         .size;
+
+    final authStore = Provider.of<AuthStore>(context);
+
+
     return Scaffold(
         body:  Stack(
           children: [
@@ -77,36 +86,63 @@ class _VerifyAccount extends State<VerifyAccount>{
                                           hintColor: AppColors.blackColor,
                                           type: TextInputType.text,
                                           label: 'Verification code',
-
-                                          // onChanged: (v) => store.email = v,
-                                          // message: store.error.email,
-                                          // error: store.error.email != null,
+                                          onChanged: (v) => store.pinCode = v,
+                                          message: store.error.pinCode,
+                                          error: store.error.pinCode != null,
 
                                         ),
                                   ),
                                   SizedBox(height: 30,),
+
+
+                              Observer(
+                                builder: (ctx) =>
                                   Container(
                                     width: double.infinity,
                                     child:  Button(
                                       mode: ButtonMode.gradient,
                                       text: 'VERIFY ME',
                                       onPressed: () {
-                                        // store.submit(context);
-                                        Navigator.of(context).pushNamed(CompleteScreen.routeName);
+                                        store.submitPin(context: context,authStore: authStore,e: (e){
+                                          showSnackBar(ctx, message: e,);
+                                        });
+
                                         },
-                                      // loading: store.loading,
+                                      loading: store.loading,
                                       loaderColor: AppColors.primaryColor,
                                       textColor: AppColors.whiteColor,
                                     ),
 
+                                  )
                                   ),
                                   Container(
                                       margin: EdgeInsets.symmetric(vertical: 45),
                                       child: Text('This code will expire in 10 minutes',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.RegularFonts,fontSize: 11),softWrap: true,textAlign: TextAlign.center,)
                                   ),
-                                  Container(
-                                      child: Text('Resend Code',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.BoldFonts,fontSize: 13,decoration:TextDecoration.underline ))
-                                  ),
+                                Observer(
+                                builder: (ctx) =>
+                                  InkWell(
+                                    onTap: (){
+                                      store.resendVerificationPin(email: authStore?.accessToken?.user?.email,
+                                          m: (m){
+                                        showSnackBar(ctx, message: m,);
+                                      },
+                                      isLoading: (isLoading){
+                                        if(isLoading){
+
+
+                                        }else{
+
+
+                                        }
+                                      }
+                                      );
+                                    },
+                                    child:   Container(
+                                        child: Text('Resend Code',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.BoldFonts,fontSize: 13,decoration:TextDecoration.underline ))
+                                    ),
+                                  )
+                              )
                                 ],
                               ),
                             )

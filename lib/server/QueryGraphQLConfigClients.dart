@@ -10,22 +10,16 @@ class QueryGraphQLConfigClients{
     return """
             query{
               resendVerificationCode(data: {
-                email:$email,
+                email:"$email",
               })
         }
     """;
   }
 
-  ///response
-  ///{
-  //   "data": {
-  //     "resendVerificationCode": true
-  //   }
-  // }
 
 
   ///Resend verification
-  static  getUserProfile(String email){
+  static  getUserProfile(){
     return """
             query 
                 {

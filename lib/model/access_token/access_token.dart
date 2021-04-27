@@ -11,13 +11,14 @@ class AccessToken {
   String token;
   String refreshToken;
   double expiresIn;
+  bool resendVerificationCode;
   User  user;
 
   AccessToken({
     this.token,
     this.refreshToken,
     this.expiresIn,
-    this.user
+    this.user,
   });
 
   factory AccessToken.fromJson(Map<String, dynamic> json) =>

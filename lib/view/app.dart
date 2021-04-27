@@ -8,7 +8,8 @@ import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'dashboard/home_screen.dart';
+import 'dashboard/home_dashboard/home_screen.dart';
+import 'dashboard/home_parent_bottomnav.dart';
 
 
 
@@ -52,7 +53,7 @@ class _HagglexApp extends State<HagglexApp> {
 
 
 
-        initialRoute: HomeDashboard.routeName,
+        initialRoute: HomeParentDashboard.routeName,
 
 
         onGenerateRoute: RouteGenerator.generateRoute,

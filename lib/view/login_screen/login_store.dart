@@ -5,8 +5,8 @@ import 'package:flutter_crypt_hagg/model/api_client_response/api_client_response
 import 'package:flutter_crypt_hagg/server/ApiClient.dart';
 import 'package:flutter_crypt_hagg/server/MutableGraphQLConfigClients.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
-import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard_store.dart';
-import 'package:flutter_crypt_hagg/view/dashboard/home_screen.dart';
+import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard/home_dashboard_store.dart';
+import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard/home_screen.dart';
 import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
 
 import 'package:mobx/mobx.dart';
@@ -107,6 +107,7 @@ abstract class _LoginStore with Store {
     String data = MutableGraphQLConfigClients().login(email, password);
 
     try {
+      String data = MutableGraphQLConfigClients().login(email, password);
 
       ApiClientResponse res  =   await  ApiClients().login(data,authStore) ;
 

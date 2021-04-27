@@ -7,8 +7,8 @@ import 'package:flutter_crypt_hagg/server/MutableGraphQLConfigClients.dart';
 import 'package:flutter_crypt_hagg/server/QueryGraphQLConfigClients.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
 import 'package:flutter_crypt_hagg/view/completescreen/complete_screen.dart';
-import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard_store.dart';
-import 'package:flutter_crypt_hagg/view/dashboard/home_screen.dart';
+import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard/home_dashboard_store.dart';
+import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard/home_screen.dart';
 import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
 
 import 'package:mobx/mobx.dart';

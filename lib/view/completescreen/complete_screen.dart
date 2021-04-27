@@ -4,7 +4,7 @@ import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
 import 'package:flutter_crypt_hagg/widgets/button.dart';
 
-import '../dashboard/home_screen.dart';
+import '../dashboard/home_dashboard/home_screen.dart';
 
 
 class CompleteScreen extends StatefulWidget{

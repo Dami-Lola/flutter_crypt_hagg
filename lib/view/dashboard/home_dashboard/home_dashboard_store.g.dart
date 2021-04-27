@@ -9,6 +9,14 @@ part of 'home_dashboard_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeDashboardStore on _HomeDashboardStore, Store {
+  Computed<String> _$currencyComputed;
+
+  @override
+  String get currency =>
+      (_$currencyComputed ??= Computed<String>(() => super.currency,
+              name: '_HomeDashboardStore.currency'))
+          .value;
+
   final _$dashboardBannerAtom =
       Atom(name: '_HomeDashboardStore.dashboardBanner');
 
@@ -55,12 +63,29 @@ mixin _$HomeDashboardStore on _HomeDashboardStore, Store {
     });
   }
 
+  final _$moreItemsAtom = Atom(name: '_HomeDashboardStore.moreItems');
+
+  @override
+  List<MoreItem> get moreItems {
+    _$moreItemsAtom.reportRead();
+    return super.moreItems;
+  }
+
+  @override
+  set moreItems(List<MoreItem> value) {
+    _$moreItemsAtom.reportWrite(value, super.moreItems, () {
+      super.moreItems = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 dashboardBanner: ${dashboardBanner},
 currencySwitch: ${currencySwitch},
-marketUpdates: ${marketUpdates}
+marketUpdates: ${marketUpdates},
+moreItems: ${moreItems},
+currency: ${currency}
     ''';
   }
 }

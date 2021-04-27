@@ -2,7 +2,7 @@ import 'package:dart_json_mapper/dart_json_mapper.dart';
 import 'package:flutter_crypt_hagg/model/access_token/access_token.dart';
 import 'package:flutter_crypt_hagg/model/user/user.dart';
 import 'package:flutter_crypt_hagg/utils/services/secure_storage.dart';
-import 'package:flutter_crypt_hagg/view/dashboard/home_screen.dart';
+import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard/home_screen.dart';
 import 'package:flutter_crypt_hagg/view/splashScreen/splash_screens.dart';
 import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
 import 'package:mobx/mobx.dart';

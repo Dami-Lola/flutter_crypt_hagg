@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_crypt_hagg/model/market_item.dart';
+import 'package:flutter_crypt_hagg/model/more_item.dart';
 import 'package:mobx/mobx.dart';
 
 
@@ -24,9 +25,11 @@ abstract class _HomeDashboardStore with Store {
   @observable
   CurrencySwitch currencySwitch  = CurrencySwitch.USD ;
 
+  @computed
+  String get currency => currencySwitch==CurrencySwitch.USD? '\$****':'\₦****';
 
 
-///dummy daya for market
+  ///dummy daya for market
   @observable
   List<Market>  marketUpdates = [
     Market(img: 'haggle.png',title: 'Haggle (HAG)',
@@ -50,6 +53,18 @@ abstract class _HomeDashboardStore with Store {
     Market(img: 'litecoin_chart.png',title: 'Litecoin (LTC)',
         chartImg: 'litecoin_chart.png',amount: 'NGN 4,272,147.00',percentage:  '+2.34%'),
 
+  ];
+
+  //
+  @observable
+  List<MoreItem>  moreItems = [
+    MoreItem(img: 'rename.png',title: 'Receive money from anyone',desc: 'Receive crypto from another wallet'),
+
+    MoreItem(img: 'send.png',title: 'Send money instantly',desc: 'Send crypto to another wallet'),
+
+    MoreItem(img: 'virtual.png',title: 'Virtual Card',desc: 'Make faster payments using HaggleX cards'),
+
+    MoreItem(img: 'global.png',title: 'Global Remittance',desc: 'Send money to anyone, anywhere'),
   ];
 
 

@@ -31,7 +31,7 @@ class _CreateAccountScreen extends State<CreateAccountScreen>{
 
   @override
   void didUpdateWidget(covariant CreateAccountScreen oldWidget) {
-    store.loadCountry();
+   // store.loadCountry();
     super.didUpdateWidget(oldWidget);
   }
 
@@ -49,179 +49,182 @@ class _CreateAccountScreen extends State<CreateAccountScreen>{
           children: [
             //background component
             ReUseAbleComponent.backgroundImage(context),
-            Padding(
-                padding: EdgeInsets.only(top: 50),
-                child: SingleChildScrollView(
-                  child:  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      //generic back button
-                      Container(
-                        child:BackButtons(onPressed: (){
-                          Navigator.of(context).pop();
-                        },),
-                        margin: EdgeInsets.symmetric(horizontal: 40),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 30,left: 16,right: 16),
-                        child: Center(
-                          child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 32),
-                              child: SingleChildScrollView(
-                                child:  Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                        alignment: Alignment.topLeft,
-                                        padding: EdgeInsets.only(bottom: 15),
-                                        child:  Text('Create a new account',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.BoldFonts,fontSize: 16),)
+            ListView(
+
+              children: <Widget>[
+                //generic back button
+                Container(
+                  alignment: Alignment.topLeft,
+
+                  child:BackButtons(onPressed: (){
+                    Navigator.of(context).pop();
+                  },),
+                  margin: EdgeInsets.all(40),
+                ),
+
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    padding: EdgeInsets.symmetric(horizontal: 32),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+
+                        SizedBox(height: 20,),
+
+                        Container(
+                            alignment: Alignment.topLeft,
+                            padding: EdgeInsets.symmetric(vertical: 15,),
+                            child:  Text('Create a new account',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.BoldFonts,fontSize: 16),)
+                        ),
+                        SizedBox(height: 25,),
+                        Observer(
+                          builder: (_) =>
+                              InputField(
+                                bottomLabelColor: AppColors.editTextFloatColor,
+                                color: AppColors.blackColor,
+                                textColor: AppColors.blackColor,
+                                hintColor: AppColors.blackColor,
+                                type: TextInputType.text,
+                                label: 'Email Address',
+                                hint:'Email' ,
+                                onChanged: (v) => store.email = v,
+                                message: store.error.email,
+                                error: store.error.email != null,
+                              ),
+                        ),
+                        SizedBox(height: 15,),
+                        Observer(
+                          builder: (_) =>
+                              InputField(
+                                bottomLabelColor: AppColors.editTextFloatColor,
+                                color: AppColors.blackColor,
+                                textColor: AppColors.blackColor,
+                                hintColor: AppColors.blackColor,
+                                type: TextInputType.visiblePassword,
+                                obscureText:  store.passwordVisible,
+                                label: 'Password (Min 8 characters)',
+                                hint:'Password' ,
+                                onChanged: (v) => store.password = v,
+                                message: store.error.password,
+                                error: store.error.password != null,
+                                suffixIcon: Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                                  child: GestureDetector(
+                                    onTap: () => store.passwordVisible
+                                        ? store.passwordVisible = false
+                                        : store.passwordVisible = true,
+                                    child: Icon(
+                                      store.passwordVisible ? Icons.remove_red_eye_outlined : Icons.remove_red_eye,
+                                      color: AppColors.primaryColor,
                                     ),
-                                    SizedBox(height: 25,),
-                                    Observer(
-                                      builder: (_) =>
-                                          InputField(
-                                            bottomLabelColor: AppColors.editTextFloatColor,
-                                            color: AppColors.blackColor,
-                                            textColor: AppColors.blackColor,
-                                            hintColor: AppColors.blackColor,
-                                            type: TextInputType.text,
-                                            label: 'Email Address',
-                                            hint:'Email' ,
-                                            onChanged: (v) => store.email = v,
-                                            message: store.error.email,
-                                            error: store.error.email != null,
-                                          ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Observer(
-                                      builder: (_) =>
-                                          InputField(
-                                            bottomLabelColor: AppColors.editTextFloatColor,
-                                            color: AppColors.blackColor,
-                                            textColor: AppColors.blackColor,
-                                            hintColor: AppColors.blackColor,
-                                            type: TextInputType.visiblePassword,
-                                            obscureText: true,
-                                            label: 'Password (Min 8 characters)',
-                                            hint:'Password' ,
-                                            onChanged: (v) => store.password = v,
-                                            message: store.error.password,
-                                            error: store.error.password != null,
-
-                                          ),
-                                    ),
-                                    SizedBox(height: 15,),
-                                    Observer(
-                                      builder: (_) =>
-                                          InputField(
-                                            bottomLabelColor: AppColors.editTextFloatColor,
-                                            color: AppColors.blackColor,
-                                            textColor: AppColors.blackColor,
-                                            hintColor: AppColors.blackColor,
-                                            type: TextInputType.text,
-                                            label: 'Create a username',
-                                            hint: 'Create a username',
-                                            onChanged: (v) => store.userName = v,
-                                            message: store.error.userName,
-                                            error: store.error.userName != null,
-
-                                          ),
-                                    ),
-                                    SizedBox(height: 15,),
-
-                                    InternationalPhoneNumberInput(
-                                      onInputChanged: (PhoneNumber number) {
-                                        store.phoneNumber = number.phoneNumber;
-                                      },
-                                      selectorConfig: SelectorConfig(
-                                        selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                                      ),
-                                      ignoreBlank: false,
-                                      textStyle: TextStyle(
-                                          fontSize: 12.0,
-                                          color:AppColors.blackColor,
-                                          fontFamily: AppFonts.RegularFonts),
-                                      autoValidateMode: AutovalidateMode.disabled,
-                                      selectorTextStyle: TextStyle(color: Colors.black),
-                                      formatInput: true,
-                                      hintText: 'Enter your phone number',
-                                      keyboardType: TextInputType.numberWithOptions(
-                                          signed: true, decimal: true),
-
-                                    ),
-                                    Observer(
-                                        builder: (_) =>
-                                            Text(store.error.phoneNumber ?? '',style: TextStyle(color: Colors.red,fontSize: 14),)
-                                    ),
-
-
-                                    SizedBox(height: 20,),
-
-
-                                    ///since I am not validating this, I don't need to observer
-                                    InputField(
-                                      bottomLabelColor: AppColors.editTextFloatColor,
-                                      color: AppColors.blackColor,
-                                      textColor: AppColors.blackColor,
-                                      hintColor: AppColors.blackColor,
-                                      type: TextInputType.text,
-                                      label: 'Referral code (optional)',
-                                      onChanged: (v) => store.referralCode = v,
-                                      message: store.error.referralCode,
-                                      error: store.error.referralCode != null,
-                                    ),
-
-
-
-                                    SizedBox(height: 10,),
-                                    Container(
-                                        margin: EdgeInsets.symmetric(vertical: 35),
-                                        child:  Text('By signing, you agree to HaggleX terms and privacy policy.',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.RegularFonts,fontSize: 11),)
-                                    ),
-                                    SizedBox(height: 20,),
-
-                                    Observer(
-                                        builder: (ctx) =>
-                                            Container(
-                                              width: double.infinity,
-                                              child:  Button(
-                                                mode: ButtonMode.gradient,
-                                                text: 'SIGN UP',
-                                                onPressed: () {
-                                                  // Navigator.of(context).pushNamed(VerifyAccount.routeName);
-                                                  store.submit(context: context,e: (message){
-                                                    store.submit(context: context,e:(e){showSnackBar(ctx, message: e,);});
-                                                  },
-                                                      authStore: authStore
-                                                  );
-                                                },
-                                                loading: store.loading,
-                                                loaderColor: AppColors.primaryColor,
-                                                textColor: AppColors.whiteColor,
-                                              ),
-                                            )
-                                    ),
-                                  ],
-
+                                  ),
                                 ),
-                              )
-                          ),
+                              ),
                         ),
-                        height: size.height/1.3,
-                        decoration: BoxDecoration(
-                            color: AppColors.whiteColor,
-                            border: Border.all(
-                              color: AppColors.whiteColor,
-                            ),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(10))
-                        ),
-                      )
-                    ],
+                        SizedBox(height: 15,),
+                        Observer(
+                          builder: (_) =>
+                              InputField(
+                                bottomLabelColor: AppColors.editTextFloatColor,
+                                color: AppColors.blackColor,
+                                textColor: AppColors.blackColor,
+                                hintColor: AppColors.blackColor,
+                                type: TextInputType.text,
+                                label: 'Create a username',
+                                hint: 'Create a username',
+                                onChanged: (v) => store.userName = v,
+                                message: store.error.userName,
+                                error: store.error.userName != null,
 
-                  ),
+                              ),
+                        ),
+                        SizedBox(height: 15,),
+
+                        InternationalPhoneNumberInput(
+                          onInputChanged: (PhoneNumber number) {
+                            store.phoneNumber = number.phoneNumber;
+                          },
+                          selectorConfig: SelectorConfig(
+                            selectorType: PhoneInputSelectorType.DIALOG,
+                          ),
+                          ignoreBlank: false,
+                          textStyle: TextStyle(
+                              fontSize: 12.0,
+                              color:AppColors.blackColor,
+                              fontFamily: AppFonts.RegularFonts),
+                          autoValidateMode: AutovalidateMode.disabled,
+                          selectorTextStyle: TextStyle(color: Colors.black),
+                          formatInput: true,
+                          hintText: 'Enter your phone number',
+                          keyboardType: TextInputType.numberWithOptions(
+                              signed: true, decimal: true),
+
+                        ),
+                        Observer(
+                            builder: (_) =>
+                                Text(store.error.phoneNumber ?? '',style: TextStyle(color: Colors.red,fontSize: 14),)
+                        ),
+
+
+
+
+
+                        ///since I am not validating this, I don't need to observer
+                        InputField(
+                          bottomLabelColor: AppColors.editTextFloatColor,
+                          color: AppColors.blackColor,
+                          textColor: AppColors.blackColor,
+                          hintColor: AppColors.blackColor,
+                          type: TextInputType.text,
+                          label: 'Referral code (optional)',
+                          onChanged: (v) => store.referralCode = v,
+                          message: store.error.referralCode,
+                          error: store.error.referralCode != null,
+                        ),
+
+
+
+                        SizedBox(height: 10,),
+                        Container(
+                            margin: EdgeInsets.symmetric(vertical: 35),
+                            child:  Text('By signing, you agree to HaggleX terms and privacy policy.',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.RegularFonts,fontSize: 11),)
+                        ),
+                        SizedBox(height: 10,),
+
+                        Observer(
+                            builder: (ctx) =>
+                                Container(
+                                  width: double.infinity,
+                                  child:  Button(
+                                    mode: ButtonMode.gradient,
+                                    text: 'SIGN UP',
+                                    onPressed: () {
+                                      // Navigator.of(context).pushNamed(VerifyAccount.routeName);
+                                      store.submit(context: context,e: (message){
+                                        store.submit(context: context,e:(e){showSnackBar(ctx, message: e,);});
+                                      },
+                                          authStore: authStore
+                                      );
+                                    },
+                                    loading: store.loading,
+                                    loaderColor: AppColors.primaryColor,
+                                    textColor: AppColors.whiteColor,
+                                  ),
+                                )
+                        ),
+
+                        SizedBox(height: 40,),
+                      ],
+
+                    ),
+
+                    decoration:ReUseAbleComponent.decorator(circleRadius: 10)
+
+
                 )
+              ],
+
             ),
           ],
         )

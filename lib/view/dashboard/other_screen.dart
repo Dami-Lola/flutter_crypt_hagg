@@ -34,7 +34,7 @@ class _OtherDashboard extends State<OtherDashboard> {
           automaticallyImplyLeading :false,
 
           title: Container(
-            height: 170,
+
             padding: EdgeInsets.all(10),
             child:Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

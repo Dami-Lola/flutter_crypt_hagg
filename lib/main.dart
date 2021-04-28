@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_crypt_hagg/main.reflectable.dart';
 import 'package:flutter_crypt_hagg/server/GraphQLConfig.dart';
+import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/services/secure_storage.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
 import 'package:flutter_crypt_hagg/view/app.dart';
@@ -18,12 +19,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
 
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: AppColors.primaryColor,
+    statusBarIconBrightness: Brightness.light
 
-  // Setup orientation
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]);
+  ));
+
 
   // hydarate store
   AuthStore authStore;

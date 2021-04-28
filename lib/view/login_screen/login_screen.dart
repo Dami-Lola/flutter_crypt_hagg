@@ -120,12 +120,12 @@ class _LoginPage extends State<LoginScreen>{
 
 
 
-                        GestureDetector(
+                        InkWell(
                           onTap: (){
                             Navigator.of(context).pushNamed(CreateAccountScreen.routeName);
                           },
                           child:   Container(
-                            margin: EdgeInsets.only(top: 20 ),
+                            padding:  EdgeInsets.all( 20 ),
                             child: Text('New User?Create a new account',style: TextStyle(color: AppColors.whiteColor,fontFamily: AppFonts.RegularFonts),)
                             ,
                           ),

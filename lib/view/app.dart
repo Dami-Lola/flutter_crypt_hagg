@@ -5,6 +5,7 @@ import 'package:flutter_crypt_hagg/utils/router/routes.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
 import 'package:flutter_crypt_hagg/view/splashScreen/splash_screens.dart';
 import 'package:flutter_crypt_hagg/view/verify_account/verifyAccount.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -40,14 +41,16 @@ class _HagglexApp extends State<HagglexApp> {
   Widget build(BuildContext context) {
 
     authStore = Provider.of<AuthStore>(context);
-    //for my testing purpose to clear data before saving
-    authStore.clearAuthStorage();
+
     authStore.persistAuth();
 
     return GraphQLProvider(
         client: widget.client,
         child:MaterialApp(
-        debugShowCheckedModeBanner: false,
+          //easy loading library to show dialog
+          builder: EasyLoading.init(),
+
+          debugShowCheckedModeBanner: false,
         title: 'Hagglex',
 
 
@@ -57,11 +60,14 @@ class _HagglexApp extends State<HagglexApp> {
         theme: ThemeData(
         fontFamily: AppFonts.RegularFonts,
 
+
         // primarySwatch: Colors.white,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
+
+
     ),
     )
     );

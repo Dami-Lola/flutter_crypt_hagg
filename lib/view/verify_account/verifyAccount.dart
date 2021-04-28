@@ -127,15 +127,7 @@ class _VerifyAccount extends State<VerifyAccount>{
                                           m: (m){
                                         showSnackBar(ctx, message: m,);
                                       },
-                                      isLoading: (isLoading){
-                                        if(isLoading){
-
-
-                                        }else{
-
-
-                                        }
-                                      }
+                                        context: context
                                       );
                                     },
                                     child:   Container(

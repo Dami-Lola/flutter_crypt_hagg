@@ -18,6 +18,20 @@ class QueryGraphQLConfigClients{
   }
 
 
+  static String resendVerifications(){
+    return '''
+      query resendToken(\$email: String!){
+        
+        resendVerificationCode(data: {
+          email:\$email,
+        })
+      }
+
+    
+    ''';
+  }
+
+
 
   ///Resend verification
   static  getUserProfile(){

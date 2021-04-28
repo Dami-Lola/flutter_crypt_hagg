@@ -5,6 +5,7 @@ import 'package:flutter_crypt_hagg/model/api_client_response/api_client_response
 import 'package:flutter_crypt_hagg/server/ApiClient.dart';
 import 'package:flutter_crypt_hagg/server/MutableGraphQLConfigClients.dart';
 import 'package:flutter_crypt_hagg/server/QueryGraphQLConfigClients.dart';
+import 'package:flutter_crypt_hagg/utils/progressLoaderhelper.dart';
 import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
 import 'package:flutter_crypt_hagg/view/completescreen/complete_screen.dart';
 import 'package:flutter_crypt_hagg/view/dashboard/home_dashboard/home_dashboard_store.dart';
@@ -128,24 +129,27 @@ abstract class _VerifyAccountStore with Store {
 
   }
 
-  Future<void> resendVerificationPin( {@required String email,Function(String) m,Function(bool) isLoading,@required AuthStore authStore}) async {
+  Future<void> resendVerificationPin( {BuildContext context,@required String email,Function(String) m,@required AuthStore authStore}) async {
     try {
 
-      isLoading(true);
-      String data = QueryGraphQLConfigClients.resendVerification(email);
+      HelperLoader.startLoading(context);
+      String data = QueryGraphQLConfigClients.resendVerifications();
 
 
 
-      ApiClientResponse res  =   await  ApiClients().resendVerificationCode(data,authStore) ;
+      ApiClientResponse res  =   await  ApiClients().resendVerificationCode(data,authStore,email) ;
       AccessToken results = AccessToken();
       results =    res.data;
+
+
+
 
       ///check for error
       if(res.hasError){
         m(res.message.toString());
-        load(false);
 
       }else if(!results.resendVerificationCode){
+
         ///it means something happen with the pin system, so user can re-triggered
        m("Code not send, please try again");
       }else {
@@ -153,9 +157,9 @@ abstract class _VerifyAccountStore with Store {
       }
     }  catch (err) {
       m(err.toString());
-      isLoading(false);
     } finally {
-      isLoading(false);
+      //to clear the dialog
+      HelperLoader.loadingSuccessful('');
     }
   }
 }

@@ -133,7 +133,7 @@ class ApiClients{
 
 
 
-  Future<ApiClientResponse>  resendVerificationCode(String data,AuthStore store) async {
+  Future<ApiClientResponse>  resendVerificationCode(String data,AuthStore store,String email) async {
     try {
 
       ///initializing GraphQLConfig
@@ -142,7 +142,11 @@ class ApiClients{
       QueryResult result = await _client.query(
         QueryOptions(
           document: gql(data), // this
+          variables: {
+            "email": "$email"
+          }
         ),
+
       );
       if(result.hasException){
         print(result.exception?.graphqlErrors[0]?.message);

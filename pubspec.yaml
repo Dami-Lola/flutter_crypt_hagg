@@ -23,8 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  connectivity: ^0.4.9
-  flutter_svg: ^0.20.0-nullsafety.3
+
   dart_json_mapper:
   dart_json_mapper_mobx:
   json_annotation: ^3.0.1
@@ -37,6 +36,7 @@ dependencies:
   auto_animated:
   intl_phone_number_input: ^0.6.0
   json_serializable: ^3.5.1
+  flutter_easyloading: ^2.2.2
 
   badges: ^1.2.0
   intl: ^0.16.1

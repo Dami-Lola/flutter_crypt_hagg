@@ -31,7 +31,7 @@ class _CreateAccountScreen extends State<CreateAccountScreen>{
 
   @override
   void didUpdateWidget(covariant CreateAccountScreen oldWidget) {
-   // store.loadCountry();
+   store.loadCountry();
     super.didUpdateWidget(oldWidget);
   }
 
@@ -208,7 +208,7 @@ class _CreateAccountScreen extends State<CreateAccountScreen>{
                                       );
                                     },
                                     loading: store.loading,
-                                    loaderColor: AppColors.primaryColor,
+                                    loaderColor: AppColors.whiteColor,
                                     textColor: AppColors.whiteColor,
                                   ),
                                 )

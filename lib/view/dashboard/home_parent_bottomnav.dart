@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
+import 'package:flutter_crypt_hagg/view/completescreen/userProfileStore.dart';
 import 'package:flutter_crypt_hagg/widgets/custom_bottom_navigation.dart';
+import 'package:provider/provider.dart';
 
 import 'home_dashboard/home_screen.dart';
 import 'other_screen.dart';
@@ -35,6 +38,8 @@ class _HomeParentDashboard extends State<HomeParentDashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final authStore = Provider.of<AuthStore>(context);
+    UserProfileStore().submit(authStore: authStore,context: context);
     return Scaffold(
 
         body: Center(

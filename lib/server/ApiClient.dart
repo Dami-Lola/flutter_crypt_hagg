@@ -34,7 +34,6 @@ class ApiClients{
 
       }else if(result.data!= null){
         var data = AccessToken.fromJson(result.data["login"]);
-        data.user.emailVerified = result.data["login"]["user"]["emailVerified"];
         response.hasError = false;
         response.data = data;
       }
@@ -71,7 +70,6 @@ class ApiClients{
 
       }else if(result.data!= null){
         var data = AccessToken.fromJson(result.data["register"]);
-        data.user.emailVerified= result.data["register"]["user"]["emailVerified"];
 
 
         response.hasError = false;
@@ -95,7 +93,6 @@ class ApiClients{
 
   Future<ApiClientResponse>  verifyUser(String data,AuthStore store) async {
     try {
-
       ///initializing GraphQLConfig
       GraphQLConfig  graphQLConfiguration  = GraphQLConfig();
       GraphQLClient _client = graphQLConfiguration.clientToQuery(store);
@@ -111,7 +108,6 @@ class ApiClients{
 
       }else if(result.data!= null){
         var data = AccessToken.fromJson(result.data['verifyUser']);
-        data.user.emailVerified= result.data["verifyUser"]["user"]["emailVerified"];
 
         response.hasError = false;
         response.data = data;
@@ -135,7 +131,6 @@ class ApiClients{
 
   Future<ApiClientResponse>  resendVerificationCode(String data,AuthStore store,String email) async {
     try {
-
       ///initializing GraphQLConfig
       GraphQLConfig  graphQLConfiguration  = GraphQLConfig();
       GraphQLClient _client = graphQLConfiguration.clientToQuery(store);
@@ -193,7 +188,6 @@ class ApiClients{
 
       }else if(result.data!= null){
         var data = AccessToken();
-        data.user.emailVerified = result.data["user"]["emailVerified"];
         response.hasError = false;
         response.data = data;
       }

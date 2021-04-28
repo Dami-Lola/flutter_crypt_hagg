@@ -38,6 +38,8 @@ dependencies:
   json_serializable: ^3.5.1
   flutter_easyloading: ^2.2.2
 
+  countdown_flutter: ^0.1.2
+
   badges: ^1.2.0
   intl: ^0.16.1
   http:

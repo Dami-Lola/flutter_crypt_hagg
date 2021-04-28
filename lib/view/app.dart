@@ -41,7 +41,6 @@ class _HagglexApp extends State<HagglexApp> {
   Widget build(BuildContext context) {
 
     authStore = Provider.of<AuthStore>(context);
-
     authStore.persistAuth();
 
     return GraphQLProvider(

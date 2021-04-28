@@ -109,14 +109,14 @@ class _VerifyAccount extends State<VerifyAccount>{
 
                                         },
                                       loading: store.loading,
-                                      loaderColor: AppColors.primaryColor,
+                                      loaderColor: AppColors.whiteColor,
                                       textColor: AppColors.whiteColor,
                                     ),
 
                                   )
                                   ),
                                   Container(
-                                      margin: EdgeInsets.symmetric(vertical: 45),
+                                      margin: EdgeInsets.symmetric(vertical: 25),
                                       child: Text('This code will expire in 10 minutes',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.RegularFonts,fontSize: 11),softWrap: true,textAlign: TextAlign.center,)
                                   ),
                                 Observer(
@@ -133,13 +133,15 @@ class _VerifyAccount extends State<VerifyAccount>{
                                     child:   Container(
                                         child: Text('Resend Code',style: TextStyle(color: AppColors.blackColor,fontFamily: AppFonts.BoldFonts,fontSize: 13,decoration:TextDecoration.underline ))
                                     ),
-                                  )
-                              )
+                                  ),
+
+                              ),
+                                  SizedBox(height: 35,)
                                 ],
                               ),
                             )
                         ),
-                        height: size.height/1.8,
+
                         decoration: BoxDecoration(
                             color: AppColors.whiteColor,
                             border: Border.all(

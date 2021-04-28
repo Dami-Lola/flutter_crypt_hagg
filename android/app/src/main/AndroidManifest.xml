@@ -3,7 +3,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="flutter_crypt_hagg"
+        android:label="Huggler"
         android:icon="@drawable/download">
 
 

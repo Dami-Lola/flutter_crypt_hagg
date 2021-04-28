@@ -112,7 +112,7 @@ class _LoginPage extends State<LoginScreen>{
                             );
                             },
                             loading: store.loading,
-                            loaderColor: AppColors.primaryColor,
+                            loaderColor: AppColors.whiteColor,
                             color: AppColors.accentsColor,
                           ),
                         )

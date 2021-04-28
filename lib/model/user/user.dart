@@ -1,34 +1,42 @@
 import 'package:dart_json_mapper/dart_json_mapper.dart' as serialize;
 import 'package:json_annotation/json_annotation.dart';
 
-part 'user.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 @serialize.jsonSerializable
 @serialize.Json(allowCircularReferences: 1)
 class User {
   String id;
-  String phonenumber;
   String email;
+  bool emailVerified;
+  String phonenumber;
   String referralCode;
   String username;
-  bool emailVerified;
-  String gender;
 
+  User({this.id, this.email, this.emailVerified, this.phonenumber, this.referralCode, this.username});
 
-  User({
-    this.id,
-    this.email,
-    this.username,
-    this.gender,
-    this.phonenumber,
-    this.emailVerified,
-    this.referralCode,
-  });
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['_id'],
+      email: json['email'],
+      emailVerified: json['emailVerified'],
+      phonenumber: json['phonenumber'],
+      referralCode: json['referralCode'],
+      username: json['username'],
+    );
+  }
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-
-  Map<String, dynamic> toJson() => _$UserToJson(this);
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.id;
+    data['email'] = this.email;
+    data['emailVerified'] = this.emailVerified;
+    data['phonenumber'] = this.phonenumber;
+    data['referralCode'] = this.referralCode;
+    data['username'] = this.username;
+    return data;
+  }
 }
+
 
 

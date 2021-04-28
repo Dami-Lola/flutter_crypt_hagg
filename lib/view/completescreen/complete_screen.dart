@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_crypt_hagg/utils/constant/ReuseableComponent.dart';
 import 'package:flutter_crypt_hagg/utils/constant/colors.dart';
 import 'package:flutter_crypt_hagg/utils/constant/fonts.dart';
+import 'package:flutter_crypt_hagg/utils/store/auth_store/auth_store.dart';
+import 'package:flutter_crypt_hagg/view/completescreen/userProfileStore.dart';
 import 'package:flutter_crypt_hagg/view/dashboard/home_parent_bottomnav.dart';
 import 'package:flutter_crypt_hagg/widgets/button.dart';
+import 'package:provider/provider.dart';
 
 import '../dashboard/home_dashboard/home_screen.dart';
 
@@ -14,8 +17,12 @@ class CompleteScreen extends StatefulWidget{
   _CompleteScreen createState()  =>  _CompleteScreen();
 }
 class _CompleteScreen extends State<CompleteScreen>{
+
+
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       body:   Container (
           child: Stack(

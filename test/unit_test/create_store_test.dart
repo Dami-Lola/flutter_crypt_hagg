@@ -68,6 +68,20 @@ void main() {
 
 
 
+    test('test if username is empty',(){
+      store.validateUser("");
+      expect(store.error.userName , 'UserName is required');
+    });
+
+
+
+
+
+    test('test if Phone number is empty',(){
+      store.validatePhoneNumber("");
+      expect(store.error.phoneNumber, 'phone Number is required');
+    });
+
 
 
 
